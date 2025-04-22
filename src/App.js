@@ -4,7 +4,7 @@ import YourBotArmy from "./components/YourBotArmy";
 import SearchBar from "./components/SearchBar";
 import SortBar from "./components/SortBar";
 import FilterBar from "./components/FilterBar";
-import ThemeToggle from "./components/ThemeToggle";
+import BotSpecs from "./components/BotSpecs";
 import "./App.css";
 
 function App() {
@@ -84,3 +84,4 @@ function App() {
   } // Closing brace for the App function
 
 export default App;
+

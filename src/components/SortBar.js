@@ -1,4 +1,5 @@
-function SortBar({ sortBy, setSortBy }) {
+function SortBar({ sortBy, setSortBy })
+ {
   return (
     <div className="sort-bar">
       <label>Sort by: </label>
@@ -11,5 +12,6 @@ function SortBar({ sortBy, setSortBy }) {
     </div>
   );
 }
+
 
 export default SortBar;

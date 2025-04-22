@@ -1,87 +1,83 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import BotCollection from "./components/BotCollection";
 import YourBotArmy from "./components/YourBotArmy";
-import SearchBar from "./components/SearchBar";
-import SortBar from "./components/SortBar";
-import FilterBar from "./components/FilterBar";
 import BotSpecs from "./components/BotSpecs";
 import "./App.css";
 
 function App() {
   const [bots, setBots] = useState([]);
   const [army, setArmy] = useState([]);
-  const [search, setSearch] = useState("");
-  const [sortBy, setSortBy] = useState("");
-  const [filters, setFilters] = useState([]);
   const [selectedBot, setSelectedBot] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-
+  // Fetch bots with error handling
   useEffect(() => {
-    fetch("http://localhost:8001/bots")
-      .then((res) => res.json())
-      .then(setBots);
+    const fetchBots = async () => {
+      try {
+        const response = await fetch("http://localhost:8001/bots");
+        if (!response.ok) throw new Error("Network response was not ok");
+        const data = await response.json();
+        setBots(data);
+      } catch (err) {
+        setError(err.message);
+        console.error("Fetch error:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchBots();
   }, []);
 
-  const enlistBot = (bot) => {
-    if (!army.find((b) => b.id === bot.id)) {
-      setArmy([...army, bot]);
-    }
-  };
-
-  const releaseBot = (bot) => {
-    setArmy(army.filter((b) => b.id !== bot.id));
-  };
-
-  const dischargeBot = (id) => {
-    fetch(`http://localhost:8001/bots/${id}`, { method: "DELETE" });
-    setArmy(army.filter((b) => b.id !== id));
-    setBots(bots.filter((b) => b.id !== id));
-  };
-
-  const filteredBots = bots
-    .filter((bot) =>
-      bot.name.toLowerCase().includes(search.toLowerCase())
-    )
-    .filter((bot) =>
-      filters.length > 0 ? filters.includes(bot.bot_class) : true
-    )
-    .sort((a, b) => {
-      if (!sortBy) return 0;
-      return b[sortBy] - a[sortBy];
-    });
-
-    return (
-      <div className="App">
-        <h1>🤖 Bot Battlr</h1>
-        <ThemeToggle />
-        {selectedBot ? (
-          <BotSpecs
-            bot={selectedBot}
-            onBack={() => setSelectedBot(null)}
-            onEnlist={(bot) => {
-              enlistBot(bot);
-              setSelectedBot(null);
-            }}
-          />
-        ) : (
-          <>
-            <SearchBar search={search} setSearch={setSearch} />
-            <SortBar sortBy={sortBy} setSortBy={setSortBy} />
-            <FilterBar filters={filters} setFilters={setFilters} />
-            <YourBotArmy
-              bots={army}
-              onRelease={releaseBot}
-              onDischarge={dischargeBot}
-            />
-            <BotCollection
-              bots={filteredBots}
-              onEnlist={(bot) => setSelectedBot(bot)}
-            />
-          </>
-        )}
-      </div>
+  // Enlist bot with duplicate check
+  const enlistBot = useCallback((bot) => {
+    setArmy(prevArmy => 
+      prevArmy.some(b => b.id === bot.id) 
+        ? prevArmy 
+        : [...prevArmy, bot]
     );
-  } // Closing brace for the App function
+  }, []);
+
+  // Discharge bot with API sync
+  const dischargeBot = useCallback(async (id) => {
+    try {
+      await fetch(`http://localhost:8001/bots/${id}`, { method: "DELETE" });
+      setArmy(prev => prev.filter(bot => bot.id !== id));
+      setBots(prev => prev.filter(bot => bot.id !== id));
+    } catch (err) {
+      console.error("Discharge failed:", err);
+    }
+  }, []);
+
+  return (
+    <div className="App">
+      <h1>🤖 Bot Battlr</h1>
+      
+      {loading ? (
+        <div className="loading">Loading bots...</div>
+      ) : error ? (
+        <div className="error">Error: {error}</div>
+      ) : selectedBot ? (
+        <BotSpecs 
+          bot={selectedBot}
+          onBack={() => setSelectedBot(null)}
+          onEnlist={enlistBot}
+        />
+      ) : (
+        <>
+          <YourBotArmy
+            bots={army}
+            onRelease={(bot) => setArmy(prev => prev.filter(b => b.id !== bot.id))}
+            onDischarge={dischargeBot}
+          />
+          <BotCollection
+            bots={bots}
+            onEnlist={(bot) => setSelectedBot(bot)}
+          />
+        </>
+      )}
+    </div>
+  );
+}
 
 export default App;
-

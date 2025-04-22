@@ -1,57 +1,212 @@
-/* src/index.css or App.css */
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #0d1117;
-  color: #f5f5f5;
-}
-
-.App {
-  text-align: center;
+/* Bot Specs Styles */
+.bot-specs {
+  background-color: var(--bg-card);
+  border-radius: 16px;
   padding: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+  border: 1px solid var(--border);
+  position: relative;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.5rem;
+.specs-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.back-button {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: none;
+  border: none;
+  color: var(--primary);
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.bot-class {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  background-color: var(--primary);
+  color: white;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+.specs-body {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.specs-image {
+  flex: 1;
+}
+
+.specs-image img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.catchphrase {
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+.specs-stats {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.stat-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.stat-label {
+  min-width: 70px;
+  text-align: right;
+}
+
+progress {
+  flex-grow: 1;
+  height: 8px;
+  border-radius: 4px;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #30363d;
+  border-radius: 4px;
+}
+
+progress::-webkit-progress-value {
+  background-color: var(--primary);
+  border-radius: 4px;
+}
+
+.power-level {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-top: 1rem;
 }
-
-.bot-card {
-  background-color: #161b22;
-  border: 1px solid #30363d;
+/* Army Container */
+.army-container {
+  background: rgba(30, 35, 40, 0.8);
   border-radius: 12px;
   padding: 1rem;
-  cursor: pointer;
-  transition: transform 0.2s ease;
+  margin-bottom: 2rem;
+  border: 1px solid #444;
 }
 
-.bot-card:hover {
-  transform: scale(1.05);
-  border-color: #58a6ff;
+.army-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.army-stats {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+/* Army Grid */
+.army-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.army-bot {
+  position: relative;
+  background: #252830;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+/* Bot Card */
+.bot-card {
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.bot-card.enlisted {
+  border: 2px solid #3fb950;
 }
 
 .bot-card img {
   width: 100%;
-  border-radius: 8px;
+  border-radius: 6px;
 }
 
-.bot-card button {
-  margin-top: 10px;
-  background-color: crimson;
+/* Discharge Button */
+.discharge-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: #f85149;
   color: white;
   border: none;
-  padding: 6px 10px;
-  border-radius: 6px;
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
   cursor: pointer;
 }
 
-.bot-specs {
-  background-color: #21262d;
+/* Empty State */
+.empty-army {
+  text-align: center;
   padding: 2rem;
-  border-radius: 12px;
-  max-width: 500px;
+  color: #888;
 }
+
+
+.level-badge {
+  background-color: var(--primary);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.specs-actions {
+  text-align: center;
+}
+
+.enlist-button {
+  background-color: var(--success);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.enlist-button:hover {
+  transform: scale(1.05);
+}
+
+/* Class-specific colors */
+.support { border-top: 4px solid #a371f7; }
+.medic { border-top: 4px solid #3fb950; }
+.assault { border-top: 4px solid #f85149; }
+.defender { border-top: 4px solid #f0883e; }
+.captain { border-top: 4px solid #58a6ff; }
+.witch { border-top: 4px solid #db61a2; }

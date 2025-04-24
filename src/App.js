@@ -29,7 +29,7 @@ function App() {
     fetchBots();
   }, []);
 
-  // Enlist bot with duplicate check
+  
   const enlistBot = useCallback((bot) => {
     setArmy(prevArmy => 
       prevArmy.some(b => b.id === bot.id) 

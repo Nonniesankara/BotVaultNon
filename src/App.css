@@ -55,6 +55,7 @@
 .catchphrase {
   font-style: italic;
   color: var(--text-secondary);
+  overflow: hidden;
 }
 
 .specs-stats {
@@ -201,6 +202,8 @@ progress::-webkit-progress-value {
 
 .enlist-button:hover {
   transform: scale(1.05);
+  cursor: pointer;
+  color: #a371f7;
 }
 
 /* Class-specific colors */

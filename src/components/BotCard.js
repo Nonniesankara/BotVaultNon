@@ -12,9 +12,9 @@ function BotCard({ bot, onClick, isEnlisted }) {
       <p className="bot-class">{bot.bot_class}</p>
       <p className="catchphrase">"{bot.catchphrase}"</p>
       <div className="bot-stats">
-        <span>❤️ {bot.health}</span>
+        <span>🏋️‍♂️ {bot.health}</span>
         <span>⚔️ {bot.damage}</span>
-        <span>🛡 {bot.armor}</span>
+        <span>🚀 {bot.armor}</span>
       </div>
     </div>
   );

@@ -15,7 +15,7 @@ function App() {
   useEffect(() => {
     const fetchBots = async () => {
       try {
-        const response = await fetch("http://localhost:8001/bots");
+        const response = await fetch("/bots.json");
         if (!response.ok) throw new Error("Network response was not ok");
         const data = await response.json();
         setBots(data);
@@ -41,7 +41,7 @@ function App() {
   // Discharge bot with API sync
   const dischargeBot = useCallback(async (id) => {
     try {
-      await fetch(`http://localhost:8001/bots/${id}`, { method: "DELETE" });
+      await fetch("/bots.json"/${id}`, { method: "DELETE" });
       setArmy(prev => prev.filter(bot => bot.id !== id));
       setBots(prev => prev.filter(bot => bot.id !== id));
     } catch (err) {

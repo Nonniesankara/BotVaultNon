@@ -29,7 +29,7 @@ function App() {
     fetchBots();
   }, []);
 
-  // Enlist bot with duplicate check
+  
   const enlistBot = useCallback((bot) => {
     setArmy(prevArmy => 
       prevArmy.some(b => b.id === bot.id) 
@@ -41,7 +41,7 @@ function App() {
   // Discharge bot with API sync
   const dischargeBot = useCallback(async (id) => {
     try {
-      await fetch("http://localhost:8001/bots"/${id}`, { method: "DELETE" });
+      await fetch(`http://localhost:8001/bots/${id}`, { method: "DELETE" });
       setArmy(prev => prev.filter(bot => bot.id !== id));
       setBots(prev => prev.filter(bot => bot.id !== id));
     } catch (err) {

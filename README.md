@@ -1,6 +1,13 @@
+<<<<<<< HEAD
               # This file# BotVaultNon
 🤖 Bot Battlr - React Bot Army Manager
 Bot Battlr Screenshot
+=======
+                            # This file# BotVaultNon
+🚀🚀🚀🚀
+
+🤖 Bot Battlr - React Bot Army Manager
+>>>>>>> refs/remotes/origin/main
 
 🚀 Overview
 Bot Battlr is a React application that allows users to enlist, manage, and discharge an army of bots. The app features a dual-panel interface with a bot vault and user army management system, complete with filtering, sorting, and detailed bot specifications.
@@ -110,3 +117,7 @@ Your Name - Milka Muthoni
 
 Project Link: https://bot-vault-non.vercel.app/
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/main

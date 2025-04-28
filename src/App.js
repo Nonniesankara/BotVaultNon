@@ -41,7 +41,7 @@ function App() {
   // Discharge bot with API sync
   const dischargeBot = useCallback(async (id) => {
     try {
-      await fetch(`https://bot-8ug8.onrender.com/bots${id}`, { method: "DELETE" });
+      await fetch(`https://bot-8ug8.onrender.com/bots/${id}`, { method: "DELETE" });
       setArmy(prev => prev.filter(bot => bot.id !== id));
       setBots(prev => prev.filter(bot => bot.id !== id));
     } catch (err) {

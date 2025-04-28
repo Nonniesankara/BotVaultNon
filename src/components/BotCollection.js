@@ -7,7 +7,7 @@ function BotCollection({ bots, onEnlist }) {
   // Handle empty state
   if (bots.length === 0) {
     return (
-      <div className="bot-collection">
+      <div className="bot-collection empty">
         <h2>🤖 Bot Vault</h2>
         <div className="empty-state">
           <p>No bots found matching your criteria!</p>
@@ -18,29 +18,29 @@ function BotCollection({ bots, onEnlist }) {
   }
 
   return (
-    <div className="bot-collection">
+    <>
       <div className="collection-header">
         <h2>🤖 Bot Vault</h2>
         <p className="bot-count">{bots.length} {bots.length === 1 ? 'bot' : 'bots'} available</p>
       </div>
-      
-      <div className="grid">
+
+      <div className="bot-collection">
         {bots.map(bot => (
           <div 
-            key={bot.id} 
-            className={`grid-item ${hoveredBot === bot.id ? 'hovered' : ''}`}
+            key={bot.id}
+            className={`bot-card-wrapper ${hoveredBot === bot.id ? 'hovered' : ''}`}
             onMouseEnter={() => setHoveredBot(bot.id)}
             onMouseLeave={() => setHoveredBot(null)}
           >
             <BotCard 
-              bot={bot} 
-              onClick={onEnlist} 
+              bot={bot}
+              onClick={onEnlist}
               isHighlighted={hoveredBot === bot.id}
             />
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 }
 

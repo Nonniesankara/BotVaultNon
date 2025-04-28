@@ -15,7 +15,7 @@ function App() {
   useEffect(() => {
     const fetchBots = async () => {
       try {
-        const response = await fetch(" http://localhost:10000/bots");
+        const response = await fetch(" https://bot-7-8gu4.onrender.com/bots");
         if (!response.ok) throw new Error("Network response was not ok");
         const data = await response.json();
         setBots(data);
@@ -41,7 +41,7 @@ function App() {
   // Discharge bot with API sync
   const dischargeBot = useCallback(async (id) => {
     try {
-      await fetch(` http://localhost:10000/bots${id}`, { method: "DELETE" });
+      await fetch(` https://bot-7-8gu4.onrender.com/bots${id}`, { method: "DELETE" });
       setArmy(prev => prev.filter(bot => bot.id !== id));
       setBots(prev => prev.filter(bot => bot.id !== id));
     } catch (err) {
